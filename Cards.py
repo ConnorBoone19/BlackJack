@@ -1,27 +1,24 @@
+Suits = ("Hearts", "Diamonds", "Spades", "Clubs")
+
 
 class Card:
-    def __init__(self,suit,val):
+    def __init__(self, suit, val):
         self.suit = suit
         self.value = val
+        self.points = val
+
+    def point(self):
+        if type(self.value) == int:
+            point_value = self.value
+            print(point_value)
+        elif self.value == "Ace":
+            point_value = 1
+            print(point_value)
+        elif type(self.value) == str:
+            point_value = 10
+            print(point_value)
+
     def show(self):
         # Printing the Cards in the deck
-        print("{} of {}".format(self.value,self.suit))
-
-class Deck:
-    def __init__(self):
-        self.cards = []
-        self.build()
-    # Populates deck
-    def build(self):
-        for s in ['Diamonds','Hearts','Spades','Clubs']:
-            for v in ['Ace']:
-                self.cards.append(Card(s,v))
-            for v in range(2,14):
-                self.cards.append(Card(s,v))
-            for v in ['Jack','Queen','King']:
-                self.cards.append(Card(s,v))
-    def show(self):
-        for c in self.cards:
-            c.show()
-deck = Deck()
-deck.show()
+        print("{} of {}".format(self.value, self.suit, ))
+        print(self.points)
