@@ -10,10 +10,11 @@ import time
 offset = 0
 move_x = 1
 buttonPressed = 1
+
+user = Player("Bob")
 deck = Deck()
 deck.shuffle()
-user = Player("Bob")
-
+deck.show()
 drawACard(user)
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
@@ -23,19 +24,28 @@ file = CFF.image_finder(user)
 
 def imageFunction(file):
     global offset
-    global move_x
     offset += 1
-    move_x = 200 + 25 * offset
     image = pygame.transform.scale(pygame.image.load((file)), (75, 100))
     return image
 
 
+move_x = 5
+length = 1
 card_image = imageFunction(file)
+file = CFF.image_finder(user)
 
 
 def drawButtonPress():
-    global buttonPressed
-    buttonPressed += 1
+    global move_x
+    global card_image
+    global length
+    drawACard(user)
+    user.showHand()
+    file = CFF.image_finder(user)
+    card_image = imageFunction(file)
+    length += 1
+    move_x += 75/25
+
 
 
 draw_button = pygame_widgets.Button(
@@ -56,11 +66,8 @@ while run:
             pygame.quit()
             run = False
             quit()
-
     screen.fill(color='Light Green')
-    for c in range(len(user.cards)):
-        file = CFF.image_finder(user)
-        card_image = imageFunction(file)
+    for f in range(0,len(user.cards)):
         pygame.surface.Surface.blit(screen, card_image, (move_x, 450))
     draw_button.listen(events)
     draw_button.draw()

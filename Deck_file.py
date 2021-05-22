@@ -1,5 +1,6 @@
-from Card_File import *
 import random
+from Card_File import *
+
 
 
 class Deck:
@@ -23,12 +24,11 @@ class Deck:
             self.cards[i], self.cards[num] = self.cards[num], self.cards[i]
 
     def drawCard(self, i=0):
-        if len(self.cards) <= 1:
+        if len(self.cards) < 1:
             # Checks to see if there is the proper amount of cards in deck
-            exit(f"No more cards in deck! {len(self.cards)}")
+            exit("No more cards in deck!")
         return self.cards.pop(i)
 
     def show(self):
         for c in self.cards:
             c.show()
-
