@@ -27,6 +27,5 @@ def imageFunction(file):
 
 
 def drawButtonPress(name):
-    drawACard(name)
     file = CFF.image_finder(name)
     imageFunction(file)

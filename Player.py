@@ -14,8 +14,18 @@ class Player:
         return self.cards.pop()
 
     def draw(self, deck):
+        print("user hand:")
         self.cardDrawn = deck.drawCard()
         self.cards.append(self.cardDrawn)
+        self.points += self.cardValue()
+        self.showHand()
+
+        if self.points > 21:
+            print("You went bust! ")
+            exit()
+        else:
+            print(f"user's points are {self.points} \n")
+            return self.points
 
     def DrawnValue(self):
         # Used to find the value for the Card Finder File Function
@@ -37,7 +47,7 @@ class Player:
 
     def playerPoints(self):
         self.points += self.cardValue()
-        print(self.points)
+
         return self.points
 
     def showHand(self):

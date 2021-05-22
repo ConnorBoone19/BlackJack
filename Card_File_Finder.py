@@ -51,7 +51,6 @@ def image_finder(name):
     value = name.DrawnValue()
     suit = name.DrawnSuit()
     suit_short = suit_short_hand(suit)
-    print(type(value))
     try:
         # Tries to convert value into an integer, if it fails that means it is a face card and does the except command
         value = int(value)
@@ -63,25 +62,24 @@ def image_finder(name):
             exit(f"Error with Card_File_Finder at inner if int function for {suit}")
     except:
         if type(value) == str:
-            print("Found String")
+            # print("Found String")
             if suit == 'Hearts':
-                print("Found Hearts")
+                # print("Found Hearts")
                 value = in_folder_suit_finder(value, suit, suit_short)
                 return value
             elif suit == 'Spades':
-                print("Found Spades")
+                # print("Found Spades")
                 value = in_folder_suit_finder(value, suit, suit_short)
                 return value
             elif suit == 'Clubs':
-                print("Found Clubs")
+                # print("Found Clubs")
                 value = in_folder_suit_finder(value, suit, suit_short)
                 return value
             elif suit == 'Diamonds':
-                print("Found Diamonds")
+                # print("Found Diamonds")
                 value = in_folder_suit_finder(value, suit, suit_short)
                 return value
             else:
                 quit("Error with Card_File_Finder at image_finder inner function")
         else:
             quit("Error with Card_File_Finder at image_finder outer function")
-
