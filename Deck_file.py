@@ -32,3 +32,7 @@ class Deck:
     def show(self):
         for c in self.cards:
             c.show()
+
+    def resetDeck(self):
+        self.cards = []
+        self.build()

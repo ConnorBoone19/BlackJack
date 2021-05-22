@@ -10,6 +10,7 @@ class Dealer:
         # at casinos dealers can not draw after if they have a certain point
         self.canDraw = True
         self.gameOver = False
+
     def deal(self):
         self.cards.pop()
         return self.cards.pop()
@@ -26,7 +27,9 @@ class Dealer:
                 if self.points > 21:
                     self.canDraw = False
                     self.gameOver = True
+                    self.showHand()
                 elif self.points == 21:
+                    self.showHand()
                     print("the dealer wins! \n")
 
                 elif self.points >= 17:
@@ -42,8 +45,9 @@ class Dealer:
                 print(f"Dealer cannot draw because there score of {self.points}\n")
                 return "end"
         else:
-            print(f"Dealer went bust and has a score of {self.points}")
+            print(f"\nDealer went bust and has a score of {self.points}")
             return "end"
+
     def DrawnValue(self):
         # Used to find the value for the Card Finder File Function
         drawn_card_index = Card.value_list.index(str(Card.getValue(self.cardDrawn)))

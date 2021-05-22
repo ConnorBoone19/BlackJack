@@ -8,12 +8,14 @@ class Player:
         self.name = name
         self.cards = []
         self.points = 0
+        self.game_over = False
 
     def deal(self):
         self.cards.pop()
         return self.cards.pop()
 
     def draw(self, deck):
+
         print("user hand:")
         self.cardDrawn = deck.drawCard()
         self.cards.append(self.cardDrawn)
@@ -22,7 +24,8 @@ class Player:
 
         if self.points > 21:
             print("You went bust! ")
-            exit()
+            self.game_over = True
+            return
         else:
             print(f"user's points are {self.points} \n")
             return self.points
@@ -53,3 +56,7 @@ class Player:
     def showHand(self):
         for card in self.cards:
             card.show()
+
+    def resetPlayer(self):
+        self.points =0
+        self.cards = []
