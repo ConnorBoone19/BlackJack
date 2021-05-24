@@ -35,4 +35,3 @@ class Deck:
 
     def resetDeck(self):
         self.cards = []
-        self.build()

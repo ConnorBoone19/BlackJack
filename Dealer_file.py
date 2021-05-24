@@ -10,7 +10,8 @@ class Dealer:
         # at casinos dealers can not draw after if they have a certain point
         self.canDraw = True
         self.gameOver = False
-
+        self.winner = False
+        self.oneMoreDraw = False
     def deal(self):
         self.cards.pop()
         return self.cards.pop()
@@ -20,32 +21,41 @@ class Dealer:
         if not self.gameOver:
             # Checks to see if the dealer can draw or not
             if self.canDraw:
-                print("The dealers hand is:")
+                # print("The dealers hand is:")
                 self.cardDrawn = deck.drawCard()
                 self.cards.append(self.cardDrawn)
-                self.points += self.cardValue()
+                # the ace safety
+                if self.cardValue() == 1:
+                    self.points += 11
+                    if self.points > 21:
+                        self.points -= 10
+
+                else:
+                    self.points += self.cardValue()
                 if self.points > 21:
                     self.canDraw = False
                     self.gameOver = True
                     self.showHand()
                 elif self.points == 21:
                     self.showHand()
-                    print("the dealer wins! \n")
+                    self.canDraw = False
+
+                    # print("the dealer wins! \n")
 
                 elif self.points >= 17:
                     # Rule is, dealer can not hit on 17 or higher
                     self.canDraw = False
                     self.showHand()
-                    print(f"the dealers score is {self.points} and cannot draw again \n")
+                    # print(f"the dealers score is {self.points} and cannot draw again \n")
 
                 else:
                     self.showHand()
-                    print(f"Dealers points are {self.points} \n")
+                    # print(f"Dealers points are {self.points} \n")
             else:
-                print(f"Dealer cannot draw because there score of {self.points}\n")
+                # print(f"Dealer cannot draw because there score of {self.points}\n")
                 return "end"
         else:
-            print(f"\nDealer went bust and has a score of {self.points}")
+             #print(f"\nDealer went bust and has a score of {self.points}")
             return "end"
 
     def DrawnValue(self):
@@ -68,9 +78,25 @@ class Dealer:
 
     def dealerPoints(self):
         self.points += self.cardValue()
-
         return self.points
 
     def showHand(self):
         for card in self.cards:
             card.show()
+
+    def whatActions(self):
+        # gives a list of actions the dealer can take
+        if self.points < 21:
+            if self.points >= 17:
+                self.canDraw = False
+                self.gameOver = False
+                return
+            else:
+                self.canDraw = True
+                self.gameOver = False
+        elif self.points >= 21:
+            self.canDraw = False
+            self.gameOver = True
+            self.winner = False
+            return self.winner
+
