@@ -5,8 +5,7 @@ deck.shuffle()
 dealer = Dealer("dealer")
 user = Player("Bob")
 dealer.draw(deck)
-
 dealer.draw(deck)
-
 dealer.draw(deck)
+dealer.showHand()
 

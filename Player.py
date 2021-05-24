@@ -2,7 +2,6 @@ from Card_File import *
 from Deck_file import *
 
 
-
 class Player:
     def __init__(self, name):
         self.name = name
@@ -10,16 +9,19 @@ class Player:
         self.points = 0
         self.game_over = False
 
-    def deal(self):
-        self.cards.pop()
-        return self.cards.pop()
-
     def draw(self, deck):
-
+        # draws a card
         print("user hand:")
         self.cardDrawn = deck.drawCard()
         self.cards.append(self.cardDrawn)
-        self.points += self.cardValue()
+        # the ace safety
+        if self.cardValue() == 1:
+            self.points += 11
+            if self.points > 21:
+                self.points -= 10
+
+        else:
+            self.points += self.cardValue()
         self.showHand()
 
         if self.points > 21:
@@ -49,14 +51,21 @@ class Player:
         return value
 
     def playerPoints(self):
-        self.points += self.cardValue()
+        # returns the players points
+        if self.cardValue() == "Ace":
+            self.points += 11
+            if self.points >21:
+                self.points -= 10
 
+        else:
+            self.points += self.cardValue()
         return self.points
 
     def showHand(self):
+        # shows the players hand
         for card in self.cards:
             card.show()
 
     def resetPlayer(self):
-        self.points =0
+        self.points = 0
         self.cards = []
